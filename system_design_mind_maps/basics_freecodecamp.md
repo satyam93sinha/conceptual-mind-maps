@@ -61,12 +61,18 @@
 
 - **Designing HA Systems**
   - Use **replication** and **load balancing** to ensure resilience.
+  - Avoid Single Point of Failures, introduce redundancy.
 
 ---
 
 ## 4. Caching and CDNs
 - **Caching**  
   - Stores frequently used data for fast access (reduces latency).
+  - Data retrieval from cache is faster than from the disk/database.
+  - Backend's computationally intensive and time consuming work could be reduced through caching.
+  - Cache data should be in sync with the Database
+  - Reduce and Handle Cache misses
+  - Data Eviction like LRU, LFU, LIFO, FIFO
 
 - **Content Delivery Networks (CDNs)**
   - Distribute content across global servers to reduce load and latency.
@@ -79,13 +85,17 @@
 
 - **Reverse Proxy**
   - Works on behalf of a server, often handling **load balancing** and **security**.
+  - Hides backend servers from public access, can have private IPs and no encryption etc for optimisation and free flow.
 
 ---
 
 ## 6. Load Balancing
 - **Algorithms**  
-  - Round-robin, least connections, IP-hash.
+  - Round-robin, Least connections, Load Based, Mixed Bag, Path or Service based, IP-hash, Weighted Round-robin, Server statuses, Alphabetic partition.
 - **Use Case:** Distributes traffic across multiple servers to prevent overload.
+- Can be introduced at multpile points like Backend Server, Databases, Caches.
+- Can limit number of requests per minute, per user etc to avoid DOS/DDOS attacks.
+- Ensure Load Balancers redundancy, fail-over, fail-back to better scalability and reduce fault-tolerance.
 
 
 
