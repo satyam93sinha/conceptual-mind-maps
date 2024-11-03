@@ -68,24 +68,25 @@
 ## 4. Caching and CDNs
 - **Caching**  
   - Stores frequently used data for fast access (reduces latency).
-  - Data retrieval from cache is faster than from the disk/database.
-  - Backend's computationally intensive and time consuming work could be reduced through caching.
-  - Cache data should be in sync with the Database
-  - Reduce and Handle Cache misses
-  - Data Eviction like LRU, LFU, LIFO, FIFO
+  - Reduces Database overload
+  - Reduces Network calls to Database
+  - Fast access compared to Disk/Database
+  - Use cache miss and eviction strategies according to use-case
 
 - **Content Delivery Networks (CDNs)**
   - Distribute content across global servers to reduce load and latency.
+  - Acts as mini-servers to quickly serve requests from a closer geographical location.
 
 ---
 
 ## 5. Proxies
 - **Forward Proxy**
   - Acts on behalf of a client (e.g., VPNs).
+  - Hides client's IP, geographical location.
 
 - **Reverse Proxy**
   - Works on behalf of a server, often handling **load balancing** and **security**.
-  - Hides backend servers from public access, can have private IPs and no encryption etc for optimisation and free flow.
+  - Hides backend servers from public access, (internal servers) can have private IPs and no encryption etc for optimisation and free flow.
 
 ---
 
@@ -93,9 +94,47 @@
 - **Algorithms**  
   - Round-robin, Least connections, Load Based, Mixed Bag, Path or Service based, IP-hash, Weighted Round-robin, Server statuses, Alphabetic partition.
 - **Use Case:** Distributes traffic across multiple servers to prevent overload.
-- Can be introduced at multpile points like Backend Server, Databases, Caches.
-- Can limit number of requests per minute, per user etc to avoid DOS/DDOS attacks.
+- Mainly introduced to regulate n/w calls or communications like client-load balancer-backend, backend-load balancer-database, backend-load balancer-caches etc.
+- Can act as rate limiter, reverse proxy server too.
 - Ensure Load Balancers redundancy, fail-over, fail-back to better scalability and reduce fault-tolerance.
+
+## 7. Hashing
+- **Hashing:** Puts universe of keys to fixed size bags.
+- Collision Handling: Chaining, Open Addressing: Linear, Quadratic and Double Hashing/Probing.
+- **Cons:**
+  - server fails, traffic still gets routed to it.
+  - High data redistribution with any change in node count, wastes previous caches.
+  - No ring structure; applies hashes directly to data.
+
+## 8. Consistent Hashing
+- Ring structure; server is hashed and placed at multiple locations for uniform distribution/routing of requests.
+- Servers at different locations in a ring can be called nodes
+- A server/node fails, requests are redirected to the next node in loop.
+- To achieve optimum uniformity in load distribution, hashed requests can be routed to hashed-server/node
+- Introduced to backend-servers and caches.
+- Addition or removal of servers has least impact on the system.
+
+## 9. Databases
+- **Relational**
+  - Strictly enforced relationships like rows and columns.
+  - Schema: Classic relational database or formalized entity structure.
+  - Data being inserted should conform to the predefined schema.
+  - SQL: Structured Query Language, a language designed to interact with structured (relational) database.
+  - Databases itself manages these queries(executes them) and returns matching results.
+  - Follows ACID property
+    - **Atomicity:** One operation fails, entire transaction fails. All or nothing.
+    - **Consistency:** Every read operation receives the most recent write operation result. Full-synchronisation.
+    - **Isolation:** you can "concurrently" (at the same time) run multiple transactions on a database, but the database will end up with a state that looks as though each operation had been run serially ( in a sequence, like a queue of operations).
+    - **Durability:** data stored in DB is persistent (ROM or disk), not in-memory (RAM).
+- **Non-relational**
+  - Less rigid, more flexible structure like key-value pairs.
+  - Follows BASE
+    - **Basically Available:** system guarantess availability.
+    - **Soft State:** DB/table state may change over time, even without input.
+    - **Eventual Consistency:** states that the system will become consistent over a (very short) period of time unless other inputs are received.
+  - At core, DB holds data in a hash-table-like structure (thus, extremely fast, simple and easy to use).
+  - Perfect for use-cases like caching, environment variables, configuration files and session state etc.
+  - Memcached (in-memory), DynamoDB (persistent)
 
 
 
