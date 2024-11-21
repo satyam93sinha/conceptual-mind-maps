@@ -134,7 +134,215 @@
     - **Eventual Consistency:** states that the system will become consistent over a (very short) period of time unless other inputs are received.
   - At core, DB holds data in a hash-table-like structure (thus, extremely fast, simple and easy to use).
   - Perfect for use-cases like caching, environment variables, configuration files and session state etc.
-  - Memcached (in-memory), DynamoDB (persistent)
+  - Memcached (in-memory), DynamoDB (persistent storage), MongoDB (document DB)
+
+---
+
+- **Database Indexing**
+- **Definition**
+  - A data structure added to databases to facilitate fast searches for specific attributes (fields).
+  - Reduces lookup time compared to iterating through entire datasets.
+- **Example**
+  - A database with 120 million records indexed on "age" allows fast queries for age-based filtering.
+- **Benefits**
+  - Optimized lookup times.
+  - Supported by both relational and non-relational databases.
+- **Use Case**
+  - Census Bureau database with age-based queries.
+
+---
+
+- **Replication**
+- **Definition**
+  - Duplication of databases for redundancy and high availability.
+- **Types of Replication**
+  - **Synchronous Replication**
+    - Data replicated simultaneously to replicas.
+    - Ensures strong consistency.
+    - Higher latency due to wait times.
+  - **Asynchronous Replication**
+    - Data replicated after confirming writes to the main database.
+    - Better performance but eventual consistency.
+- **Considerations**
+  - Synchronization intervals depend on use case.
+  - Atomicity: Write to main DB fails if replica synchronization fails.
+- **Benefits**
+  - High availability.
+  - Redundancy to handle failures.
+- **Sharding**
+- **Definition**
+  - Partitioning data into smaller, manageable chunks called "shards."
+- **Purpose**
+  - Addresses scalability when replication alone cannot solve throughput or latency issues.
+- **Strategies**
+  - **Row-based**: Each shard contains a fixed number of rows.
+  - **Attribute-based**: Shards determined by specific attributes (e.g., region, customer ID).
+- **Benefits**
+  - Improves performance by distributing data across multiple smaller databases.
+- **Use Cases**
+  - Global applications with data partitioned by geographic location.
+
+---
+
+## 10. Leader Election
+- **Definition**
+  - Process of designating one server as the leader to perform specific tasks.
+- **Purpose**
+  - Avoid multiple servers performing conflicting actions (e.g., API updates).
+- **Key Features**
+  - Detection of leader failure.
+  - Re-election of a new leader in case of failure.
+- **Challenges**
+  - Maintaining synchronization of data, state, and operations among servers.
+  - Handling partial network outages and disconnected servers.
+- **Consensus Algorithms**
+  - Used to agree on which server is the leader.
+  - Example: Blockchain-inspired consensus for leader selection.
+- **Tools**
+  - **etcd**
+    - Key-value store for high availability and strong consistency.
+    - Stores the current leader as a key-value pair.
+    - Relied upon for accurate "source of truth" in leader elections.
+
+---
+
+## Connections and Concepts
+- **Indexing and Replication**
+  - Indexing optimizes data access speed; replication ensures availability and fault tolerance.
+- **Replication and Sharding**
+  - Replication duplicates databases for redundancy, while sharding partitions data to improve scalability.
+- **Leader Election and Replication**
+  - Leader election often operates on systems using replication to ensure one source controls updates.
+- **Sharding and Indexing**
+  - Indexing improves query performance within individual shards.
+
+---
+
+## Summary
+This mind map connects key database and distributed system concepts, focusing on:
+- **Indexing**: Efficient querying.
+- **Replication**: High availability.
+- **Sharding**: Scalability.
+- **Leader Election**: Coordination in redundant systems.
+
+# Mind Map: Polling, Streaming, Endpoint Protection, Messaging, and Logging Systems
+
+## Section 11: Polling, Streaming, Sockets
+
+### Polling
+- **Definition**
+  - The client repeatedly requests data from the server at regular intervals.
+- **Characteristics**
+  - Simple and predictable.
+  - Causes frequent server requests.
+- **Downsides**
+  - High network and server load.
+  - Not truly real-time.
+- **Use Case**
+  - Driver location updates in a ride-hailing app every few seconds.
+
+### Streaming
+- **Definition**
+  - Uses long-lived connections for real-time two-way data flow (e.g., WebSockets).
+- **Key Features**
+  - Server pushes updates as they occur.
+  - Efficient for continuous updates.
+- **Advantages**
+  - Real-time data transmission.
+  - Reduces overhead compared to polling.
+- **Use Case**
+  - Collaborative coding, online multiplayer games.
+- **Comparison**
+  - Polling pulls data; streaming pushes data.
+
+---
+
+## Section 12: Endpoint Protection
+
+### Rate Limiting
+- **Definition**
+  - Limits the number of operations a client can perform in a time window.
+- **Benefits**
+  - Protects servers from abuse (e.g., DoS attacks).
+  - Enforces usage tiers (e.g., free-tier API limits).
+- **Key Considerations**
+  - Fast limit checks with in-memory databases (e.g., Redis).
+  - Distributed systems require consistent limit enforcement.
+
+### Denial of Service (DoS) Protection
+- **Problem**
+  - Overwhelms servers with excessive requests.
+- **Mitigation**
+  - Rate limiting handles simple DoS attacks.
+  - Sophisticated protection needed for Distributed DoS (DDoS).
+
+---
+
+## Section 12: Messaging & Pub-Sub
+
+### Messaging Systems
+- **Definition**
+  - Facilitate communication between distributed system components.
+- **Importance**
+  - Ensures reliable, asynchronous data exchange.
+- **Use Case**
+  - Ticketing systems: notifying email services about confirmed bookings.
+
+### Pub/Sub Model
+- **Components**
+  - **Publisher**: Sends messages.
+  - **Subscriber**: Receives messages.
+  - **Topics**: Channels for specific message types.
+  - **Messages**: Data being communicated.
+- **Advantages**
+  - Decouples publishers and subscribers.
+  - Enables event-driven architectures.
+- **Guarantees**
+  - "At least once" delivery ensures no message loss.
+
+### Idempotency
+- **Definition**
+  - Operations produce the same result if performed multiple times.
+- **Use Case**
+  - Payment systems avoid duplicate charges.
+- **Non-Idempotent Examples**
+  - Social media comments or likes.
+
+---
+
+## Section 13: Smaller Essentials
+
+### Logging
+- **Purpose**
+  - Tracks system events for debugging, monitoring, and analytics.
+- **Key Features**
+  - Time-series data format.
+  - Used for audits and performance tuning.
+
+### Monitoring
+- **Purpose**
+  - Converts log data into insights through dashboards and alerts.
+- **Tools**
+  - Specialized databases for time-series data.
+  - Alerts for critical metrics like latency or error rates.
+
+### Alerting
+- **Definition**
+  - Automated notifications for threshold breaches.
+- **Examples**
+  - High response times, error spikes.
+
+---
+
+## Connections Across Topics
+- **Polling vs. Streaming**
+  - Polling suits periodic updates; streaming is real-time.
+- **Messaging & Logging**
+  - Logs track system events; messaging queues tasks based on these events.
+- **Endpoint Protection & Pub/Sub**
+  - Rate-limiting protects publishers in event-driven systems.
+- **Monitoring & Idempotency**
+  - Alerts ensure consistent outcomes in idempotent operations.
 
 
 
