@@ -73,6 +73,45 @@
   - **Example:**
     ```python
     square = lambda x: x**2
+    pairs = [(1, 2), (3, 4), (5, 6)]
+    even_sum = lambda acc, pair: acc + pair[0] if pair[0] % 2 == 0 else acc, pairs, 0
+    ```
+  - `filter` functions
+  - **Example:**
+    ```python
+    people = [
+    {'name': 'Alice', 'age': 30},
+    {'name': 'Bob', 'age': 25},
+    {'name': 'Charlie', 'age': 35}
+    ]
+
+    adults = list(filter(lambda person: person['age'] >= 18, people))
+    print(adults)
+
+    strings = ["apple", "banana", "cherry", "date"]
+    long_strings = list(filter(lambda x: len(x) > 5, strings))
+    print(long_strings)  # Output: ['banana', 'cherry']
+    ```
+  -  `reduce` functions
+  - **Example:**
+    ```python
+    from functools import reduce
+
+    numbers = [1, 2, 3, 4, 5, 6]
+    product_of_even_numbers = reduce(lambda x, y: x * y if y % 2 == 0 else x, numbers, 1)
+    print(product_of_even_numbers)  # Output: 48
+
+    from functools import reduce
+
+    strings = ["apple", "banana", "cherry", "date"]
+    longest_string = reduce(lambda x, y: x if len(x) > len(y) else y, strings)
+    print(longest_string)  # Output: 'banana'
+
+    from functools import reduce
+
+    lists = [[1, 2], [3, 4], [5, 6]]
+    flattened_list = reduce(lambda x, y: x + y, lists)
+    print(flattened_list)  # Output: [1, 2, 3, 4, 5, 6]
     ```
 - **Decorators**
   - Used to modify the behavior of functions.
