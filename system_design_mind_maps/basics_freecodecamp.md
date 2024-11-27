@@ -22,7 +22,7 @@
   - **Message Components**
     - IP Header: From/To addresses
     - TCP Header: Ordering of packets, no. of packets etc
-    - Data: Information
+    - Data: Information to be shared
 
 - **HTTP/HTTPS (Hypertext Transfer Protocol)**
   - Client requests, Server responds
@@ -33,18 +33,18 @@
 
 ## 2. Storage, Latency, and Throughput
 - **Storage Types**
-  - **Memory (RAM):** Fast but volatile(data lost in Power OFF), costly.
+  - **Memory (RAM):** Fast but volatile(data lost on Power OFF), costly.
   - **Disk Storage:** Persistent but slower (used for databases).
 
 - **Latency**
   - Time taken (duration) for an operation (e.g., request-response cycle, searching in dict than array).
   - Lower latency means faster response time.
-  - Affected by Client-Server distance
+  - Affected by Client-Server distance.
 
 - **Throughput**
   - Amount of data processed in a given time (e.g., Mbps or requests/second). Max capacity of a system.
   - Higher throughput means better scalability improving performance.
-  - System is limited by its lowest throughput (bottleneck)
+  - System is limited by its lowest throughput (bottleneck) server/part.
 
 ---
 
@@ -139,48 +139,51 @@
 ---
 
 - **Database Indexing**
-- **Definition**
-  - A data structure added to databases to facilitate fast searches for specific attributes (fields).
-  - Reduces lookup time compared to iterating through entire datasets.
-- **Example**
-  - A database with 120 million records indexed on "age" allows fast queries for age-based filtering.
-- **Benefits**
-  - Optimized lookup times.
-  - Supported by both relational and non-relational databases.
-- **Use Case**
-  - Census Bureau database with age-based queries.
+  - **Definition**
+    - A data structure added to databases to facilitate fast searches for specific attributes (fields).
+    - Reduces lookup time compared to iterating through entire datasets.
+  - **Example**
+    - A database with 120 million records indexed on "age" allows fast queries for age-based filtering.
+  - **Benefits**
+    - Optimized lookup times.
+    - Supported by both relational and non-relational databases.
+  - **Use Case**
+    - Census Bureau database with age-based queries.
 
 ---
 
 - **Replication**
-- **Definition**
-  - Duplication of databases for redundancy and high availability.
-- **Types of Replication**
-  - **Synchronous Replication**
-    - Data replicated simultaneously to replicas.
-    - Ensures strong consistency.
-    - Higher latency due to wait times.
-  - **Asynchronous Replication**
-    - Data replicated after confirming writes to the main database.
-    - Better performance but eventual consistency.
-- **Considerations**
-  - Synchronization intervals depend on use case.
-  - Atomicity: Write to main DB fails if replica synchronization fails.
-- **Benefits**
-  - High availability.
-  - Redundancy to handle failures.
+  - **Definition**
+    - Duplication of databases for redundancy and high availability.
+  - **Types of Replication**
+    - **Synchronous Replication**
+      - Data replicated simultaneously to replicas.
+      - Ensures strong consistency.
+      - Higher latency due to wait times.
+    - **Asynchronous Replication**
+      - Data replicated after confirming writes to the main database.
+      - Better performance but eventual consistency.
+  - **Considerations**
+    - Synchronization intervals depend on use case.
+    - Atomicity: Write to main DB fails if replica synchronization fails.
+  - **Benefits**
+    - High availability.
+    - Redundancy to handle failures.
+
+---
+
 - **Sharding**
-- **Definition**
-  - Partitioning data into smaller, manageable chunks called "shards."
-- **Purpose**
-  - Addresses scalability when replication alone cannot solve throughput or latency issues.
-- **Strategies**
-  - **Row-based**: Each shard contains a fixed number of rows.
-  - **Attribute-based**: Shards determined by specific attributes (e.g., region, customer ID).
-- **Benefits**
-  - Improves performance by distributing data across multiple smaller databases.
-- **Use Cases**
-  - Global applications with data partitioned by geographic location.
+  - **Definition**
+    - Partitioning data into smaller, manageable chunks called "shards."
+  - **Purpose**
+    - Addresses scalability when replication alone cannot solve throughput or latency issues.
+  - **Strategies**
+    - **Row-based**: Each shard contains a fixed number of rows.
+    - **Attribute-based**: Shards determined by specific attributes (e.g., region, customer ID).
+  - **Benefits**
+    - Improves performance by distributing data across multiple smaller databases.
+  - **Use Cases**
+    - Global applications with data partitioned by geographic location.
 
 ---
 
@@ -225,7 +228,7 @@ This mind map connects key database and distributed system concepts, focusing on
 - **Sharding**: Scalability.
 - **Leader Election**: Coordination in redundant systems.
 
-# Mind Map: Polling, Streaming, Endpoint Protection, Messaging, and Logging Systems
+---
 
 ## Section 11: Polling, Streaming, Sockets
 
