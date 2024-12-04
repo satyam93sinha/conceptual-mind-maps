@@ -9,7 +9,7 @@
     y = "Hello"  # string
     z = 3.14  # float
     ```
-  - No explicit declaration of types is required.
+  - Dynamic Typing: No explicit declaration of types is required.
 - **Data Types**
   - **Primitive Types**: int, float, str, bool
   - **Collection Types**: list, tuple, dict, set
@@ -35,6 +35,19 @@
     else:
         print("x is less than 5")
     ```
+- **Switch/Match case**
+  - Use `match` and `case`
+  - **Example:**
+  ```python
+  x = 10
+  match x:
+    case 10:
+      print(10)
+    case 15:
+      print(15)
+    case _:
+      print("default")
+  ```
 - **Loops**
   - `for`: Iterates over a sequence.
   - `while`: Repeats as long as the condition is `True`.
@@ -56,6 +69,7 @@
 ## 3. Functions
 - **Definition**
   - Defined using the `def` keyword.
+  - Every function returns None by default.
   - **Example:**
     ```python
     def greet(name):
@@ -73,8 +87,7 @@
   - **Example:**
     ```python
     square = lambda x: x**2
-    pairs = [(1, 2), (3, 4), (5, 6)]
-    even_sum = lambda acc, pair: acc + pair[0] if pair[0] % 2 == 0 else acc, pairs, 0
+    print(square(2))
     ```
   - `filter` functions
   - **Example:**
@@ -85,12 +98,12 @@
     {'name': 'Charlie', 'age': 35}
     ]
 
-    adults = list(filter(lambda person: person['age'] >= 18, people))
+    adults = list(functools.filter(lambda person: person['age'] >= 18, people))
     print(adults)
 
-    strings = ["apple", "banana", "cherry", "date"]
-    long_strings = list(filter(lambda x: len(x) > 5, strings))
-    print(long_strings)  # Output: ['banana', 'cherry']
+    fruits = ["apple", "banana", "cherry", "date"]
+    fruits_len_grt_5 = list(functools.filter(lambda fruit: len(fruit) > 5, fruits))
+    print(fruits_len_grt_5)  # Output: ['banana', 'cherry']
     ```
   -  `reduce` functions
   - **Example:**
@@ -101,13 +114,9 @@
     product_of_even_numbers = reduce(lambda x, y: x * y if y % 2 == 0 else x, numbers, 1)
     print(product_of_even_numbers)  # Output: 48
 
-    from functools import reduce
-
     strings = ["apple", "banana", "cherry", "date"]
     longest_string = reduce(lambda x, y: x if len(x) > len(y) else y, strings)
     print(longest_string)  # Output: 'banana'
-
-    from functools import reduce
 
     lists = [[1, 2], [3, 4], [5, 6]]
     flattened_list = reduce(lambda x, y: x + y, lists)
@@ -171,6 +180,7 @@
     ```
 - **Encapsulation**
   - Control access using private and public attributes (`_` and `__`).
+  - Private attributes are stored through name mangling thus, weak Encapsulation.
 - **Special Methods**
   - Define custom behavior for operators (`__add__`, `__str__`).
   - **Example:**

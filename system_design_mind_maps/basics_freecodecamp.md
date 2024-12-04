@@ -122,9 +122,9 @@
   - SQL: Structured Query Language, a language designed to interact with structured (relational) database.
   - Databases itself manages these queries(executes them) and returns matching results.
   - Follows ACID property
-    - **Atomicity:** One operation fails, entire transaction fails. All or nothing.
-    - **Consistency:** Every read operation receives the most recent write operation result. Full-synchronisation.
-    - **Isolation:** you can "concurrently" (at the same time) run multiple transactions on a database, but the database will end up with a state that looks as though each operation had been run serially ( in a sequence, like a queue of operations).
+    - **Atomicity:** One operation fails, entire transaction fails. All or nothing. It must either be complete in its entirety or have no effect whatsoever.
+    - **Consistency:** Every read operation receives the most recent write operation result. Full-synchronisation. It must conform to existing constraints in the database.
+    - **Isolation:** you can "concurrently" (at the same time) run multiple transactions on a database, but the database will end up with a state that looks as though each operation had been run serially ( in a sequence, like a queue of operations). It must not affect other transactions
     - **Durability:** data stored in DB is persistent (ROM or disk), not in-memory (RAM).
 - **Non-relational**
   - Less rigid, more flexible structure like key-value pairs.

@@ -125,5 +125,3 @@
 - Regularly patch and update instances for security.
 
 ---
-
-This markdown structure provides a comprehensive overview of AWS EC2, explaining its key features, use cases, and configurations. Let me know if you need detailed examples or further elaboration on specific topics!
