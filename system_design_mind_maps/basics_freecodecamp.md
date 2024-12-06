@@ -131,7 +131,7 @@
   - Follows BASE
     - **Basically Available:** system guarantess availability.
     - **Soft State:** DB/table state may change over time, even without input.
-    - **Eventual Consistency:** states that the system will become consistent over a (very short) period of time unless other inputs are received.
+    - **Eventual Consistency:** the system will become consistent over a period of time, given that the system doesn't receive input during that period.
   - At core, DB holds data in a hash-table-like structure (thus, extremely fast, simple and easy to use).
   - Perfect for use-cases like caching, environment variables, configuration files and session state etc.
   - Memcached (in-memory), DynamoDB (persistent storage), MongoDB (document DB)

@@ -43,6 +43,9 @@
      - **Key-Value Store (e.g., Redis)**:
        - Simple key-value pairs.
        - High-speed lookups; good for caching.
+       - Internal Storage: SSD, rotating disks or in-memory.
+       - Basis of other DBs mentioned below.
+       - Commonly Supported Operations: Read, Write and Delete a key-value pair.
      - **Document Store (e.g., MongoDB)**:
        - Stores data in JSON-like structures.
        - Flexible schemas for dynamic data.
@@ -61,6 +64,13 @@
        - Scales by adding more servers.
    - **Use Cases**:
      - Real-time analytics, content management, social networks.
+   - **Disadvantages**:
+     - **Key-Value Store**:
+       - Requires Application Logic
+       - Filtering: Absence of where clause
+       - Sorting: Complex sorting requires Application Logic
+       - Joining: Application logic is required to correlate data
+        
 
 ---
 
