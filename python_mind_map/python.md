@@ -122,6 +122,9 @@
     flattened_list = reduce(lambda x, y: x + y, lists)
     print(flattened_list)  # Output: [1, 2, 3, 4, 5, 6]
     ```
+- **Closure**
+  - Nested functions can access the outer scope of the enclosing function - Closure.
+  - A function that remembers the environment it was created in, even after the environment is no longer active.
 - **Decorators**
   - Used to modify the behavior of functions.
   - **Example:**
@@ -230,3 +233,29 @@
       # handle exception
   finally:
       # cleanup code
+
+## 8. Garbage Collection
+- **Reference Counting**
+  - keeps track of an object's reference
+  - reference is incremented when object is used, decremented on reference removal
+  - object is garbage collected if reference count decrements to 0
+- **Generational Garbage Collection**
+  - Garbage collects cyclic referenced objects
+  - Gen-0 (younger): Python v3.13 - threshold: 2000 objects to begin collection process.
+  - Mostly, objects are cleaned from Gen-0.
+  - Gen-1 (adult): Python v3.13 - threshold: 10 objects to begin collection
+  - Gen-2 (older): Python v3.13 - threshold: 10 objects
+  - Garbage collector triggers collection process when threshold is reached in each Generation. The object surviving this collection is moved to older generation.
+
+  ```
+  python
+  import gc
+  gc.get_threshold()
+  > 2000, 10, 10
+
+  gc.get_count()  # gives current count of objects in each generation
+  gc.collect()  # collects objects
+
+  gc.set_threshold(<GEN-0 threshold>, <GEN-1 threshold>, <GEN-2 threshold>)
+  # sets threshold values for 0, 1, 2 generations.
+  ```

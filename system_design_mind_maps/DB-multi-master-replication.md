@@ -26,6 +26,9 @@ b. Conflict Handling
 	•	Conflict-free replicated data types (CRDTs).
 	•	Why It’s Needed:
 	•	Concurrent updates can lead to conflicting data states.
+	-> complex mechanisms for prevention or detection and reconciliation of conflicting changes. Techniques typically used for these purposes are versioning, vector clocks, gossiping and read repair (e.g. in Dynamo) and convergent or commutative datatypes (e.g. in Riak).
+
+
 
 c. Architectures
 
