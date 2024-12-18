@@ -233,6 +233,27 @@
       # handle exception
   finally:
       # cleanup code
+  ```
+- ***Exception Chanining***
+  ```python
+  try:
+    v = {}['a']
+  except KeyError as e:
+      raise ValueError('failed') from e
+  
+  Output: from e can also be skipped
+  Traceback (most recent call last):
+  File "t.py", line 2, in <module>
+    v = {}['a']
+  KeyError: 'a'
+
+  The above exception was the direct cause of the following exception:
+
+  Traceback (most recent call last):
+    File "t.py", line 4, in <module>
+      raise ValueError('failed') from e
+  ValueError: failed
+  ```
 
 ## 8. Garbage Collection
 - **Reference Counting**
@@ -247,8 +268,7 @@
   - Gen-2 (older): Python v3.13 - threshold: 10 objects
   - Garbage collector triggers collection process when threshold is reached in each Generation. The object surviving this collection is moved to older generation.
 
-  ```
-  python
+  ```python
   import gc
   gc.get_threshold()
   > 2000, 10, 10
@@ -259,3 +279,102 @@
   gc.set_threshold(<GEN-0 threshold>, <GEN-1 threshold>, <GEN-2 threshold>)
   # sets threshold values for 0, 1, 2 generations.
   ```
+## 9. Custom Context Managers
+- **Class-Based**
+```python
+  class FileManager:
+    def __init__(self, filename, mode):
+        self.filename = filename
+        self.mode = mode
+        self.file = None
+
+    def __enter__(self):
+        self.file = open(self.filename, self.mode)
+        return self.file
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if self.file:
+            self.file.close()
+
+
+  # Example usage
+  if __name__ == "__main__":
+    with FileManager("example.txt", "w") as file:
+        file.write("Hello, world!\n")
+  
+  import time
+
+
+  class Timer:
+    def __enter__(self):
+        self.start_time = time.time()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.end_time = time.time()
+        elapsed_time = self.end_time - self.start_time
+        print(f"Elapsed time: {elapsed_time} seconds")
+
+
+  # Example usage
+  if __name__ == "__main__":
+    with Timer() as timer:
+        # Code block to measure the execution time
+        time.sleep(2)  # Simulate some time-consuming operation
+  Elapsed time: 2.002082347869873 seconds
+  ```
+- **Function-Based**
+  - The @contextmanager decorator transforms the timer function into a context manager. Inside the function, start_time is captured, and the yield statement pauses execution, allowing code within the with block to run.
+  Finally, __exit__ functionality is achieved by capturing the end time and printing the elapsed time.
+  Essentially, you write the logic for the __enter__ before the yield keyword whereas the logic for __exit__ comes after. Both approaches achieve the same outcome, but the choice depends on your preference for structure and readability.
+  ```python
+  import time
+  from contextlib import contextmanager
+
+
+  @contextmanager
+  def timer():
+    start_time = time.time()
+    yield
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Elapsed time: {elapsed_time} seconds")
+
+
+  # Example usage
+  if __name__ == "__main__":
+    with timer():
+        time.sleep(2)
+  Elapsed time: 2.0020740032196045 seconds
+  ```
+## 10. __new__ vs __init__
+  - __new__ is a static method, while __init__ is an instance method.
+  - __new__ is responsible for creating and returning a new instance, while __init__ is responsible for initializing the attributes of the newly created object.
+  - __new__ is called before __init__.
+  - __new__ happens first, then __init__.
+  - __new__ can return any object, while __init__ must return None.
+  - **Syntax**
+    ```python
+    class Person:
+    def __new__(cls, name, age):
+        print("Creating a new Person object")
+        instance = super().__new__(cls)
+        return instance
+
+    def __init__(self, name, age):
+        print("Initializing the Person object")
+        self.name = name
+        self.age = age
+
+    person = Person("John Doe", 30)
+    print(f"Person's name: {person.name}, age: {person.age}")
+
+    # Creating a new Person object
+    # Initializing the Person object
+    # Person's name: John Doe, age: 30
+    ```
+
+
+References:
+1. [CustomContextManagers] https://www.datacamp.com/tutorial/writing-custom-context-managers-in-python
+2. [__new__vs__init__] https://builtin.com/data-science/new-python 
