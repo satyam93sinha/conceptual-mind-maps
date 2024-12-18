@@ -110,6 +110,27 @@
        def say_hello():
            print("Hello!")
        ```
+       ```python
+       def retries(retry=3, catch_exception=ValueError):
+            def decorator(func):
+                @functools.wraps(func)
+                def wrapper(*args, **kwargs):
+                    for _ in range(retry):
+                        try:
+                            result = func(*args, **kwargs)
+                            return result
+                        except catch_exception:
+                            pass
+                    raise catch_exception(f"failed to execute func, {retry} retries")
+                return wrapper
+            return decorator
+
+        @retries(retry=3, catch_exception=ValueError)
+        def add(a,b):
+            if a < 0 or b < 0:
+                raise ValueError("Negative Numbers are not allowed.")
+            return a + b
+       ```
 
 ## 5. **Built-in Decorators**
    - **`@staticmethod`**:
