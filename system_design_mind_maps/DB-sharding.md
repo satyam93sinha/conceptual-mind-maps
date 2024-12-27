@@ -84,7 +84,7 @@
     - Records assigned to logical partitions instead of servers.
     - Reduces data reassignment during topology changes.
   - Examples:
-    - Key-Value Stores: Dynamo, Riak, Cassandra.
+    - Key-Value Stores: DynamoDB, Riak, Cassandra.
     - Wide-Column Stores: Cassandra, Azure Tables.
 ### 6.3 Entity-Group Sharding
 - **Definition**: Groups related data into partitions (entity groups) for co-located transactions.
@@ -94,8 +94,8 @@
   - **Explicit Grouping**: Application-defined (e.g., G-Store, Megastore).
   - **Derived Grouping**: Based on access patterns (e.g., Relational Cloud, Cloud SQL Server).
 - **Challenges**:
-  - Multi-group transactions require complex protocols.
-  - **Solution**:
+  - Multi-group transactions require complex protocols.?
+  - **Solution**:?
     - Transfer data ownership between groups.
     - Use multi-node transaction managers as a fallback.
 
@@ -109,7 +109,7 @@
 - **7.3 Cassandra**:
   - Consistent hashing for automatic sharding.
 - **7.4 PostgreSQL**:
-  - Extensions like Citus for sharding support.
+  - Extensions like Citus for sharding support.HOW?
 - **7.5 Wide-Column Stores**
   - Examples: BigTable, HBase, Hypertable.
   - Use: Range Sharding for structured data queries.
@@ -117,7 +117,7 @@
   - Examples: MongoDB, RethinkDB, Espresso.
   - Use: Range Sharding for JSON-like document data.
 - **7.7 Key-Value Stores**
-  - Examples: Dynamo, Riak, Cassandra.
+  - Examples: DynamoDB, Riak, Cassandra.
   - Use: Hash Sharding with Consistent Hashing for high write scalability.
 - **7.8 Relational Cloud Systems**
   - Examples: Cloud SQL Server, Relational Cloud.
