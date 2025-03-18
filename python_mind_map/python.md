@@ -98,11 +98,11 @@
     {'name': 'Charlie', 'age': 35}
     ]
 
-    adults = list(functools.filter(lambda person: person['age'] >= 18, people))
+    adults = list(filter(lambda person: person['age'] >= 18, people))
     print(adults)
 
     fruits = ["apple", "banana", "cherry", "date"]
-    fruits_len_grt_5 = list(functools.filter(lambda fruit: len(fruit) > 5, fruits))
+    fruits_len_grt_5 = list(filter(lambda fruit: len(fruit) > 5, fruits))
     print(fruits_len_grt_5)  # Output: ['banana', 'cherry']
     ```
   -  `reduce` functions

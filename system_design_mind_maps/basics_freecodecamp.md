@@ -265,6 +265,7 @@ This mind map connects key database and distributed system concepts, focusing on
 ### Rate Limiting
 - **Definition**
   - Limits the number of operations a client can perform in a time window.
+  - Load Balancer: Fixed size / Leaky Bucket
 - **Benefits**
   - Protects servers from abuse (e.g., DoS attacks).
   - Enforces usage tiers (e.g., free-tier API limits).

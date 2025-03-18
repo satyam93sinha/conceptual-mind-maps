@@ -43,7 +43,7 @@
 
 ## 4. Real-World Implications
 
-### 4.1 Scenarios
+### 4.1 Scenarios - Consistency or Availability
 - **Critical Condition:** During a partition, trade-offs must be made.
   - Maintain **Availability** with stale data (AP).
   - Maintain **Consistency** by denying requests (CP).
