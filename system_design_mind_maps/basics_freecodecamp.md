@@ -40,6 +40,7 @@
   - Time taken (duration) for an operation (e.g., request-response cycle, searching in dict than array).
   - Lower latency means faster response time.
   - Affected by Client-Server distance.
+  - Time taken for a request to reach server (Correct).
 
 - **Throughput**
   - Amount of data processed in a given time (e.g., Mbps or requests/second). Max capacity of a system.
@@ -147,8 +148,6 @@
   - **Benefits**
     - Optimized lookup times.
     - Supported by both relational and non-relational databases.
-  - **Use Case**
-    - Census Bureau database with age-based queries.
 
 ---
 
@@ -352,4 +351,4 @@ This mind map connects key database and distributed system concepts, focusing on
 
 ---
 
-This mind map captures the core concepts, protocols, and strategies mentioned in the article, making it easier to recall key topics relevant to system design interviews. For more details, explore the full article [here](https://www.freecodecamp.org/news/systems-design-for-interviews/).
+For more details, explore the full article [here](https://www.freecodecamp.org/news/systems-design-for-interviews/).

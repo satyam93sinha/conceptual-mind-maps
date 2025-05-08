@@ -8,11 +8,13 @@
 
 ## 2. Cache Architecture  
 - **Read-Through Cache**  
-  - Data fetched from cache; if not present, fetched from database and updated in cache.  
+  - Data fetched from cache; if not present (cache miss), Cache fetches data from database, updates cache then returns to Application.
+  - Application may see Cache as the primary source of Data.  
   - **Use Case**: Simplifies access logic.
 
 - **Write-Through Cache**  
-  - Data written to both cache and database simultaneously.  
+  - Data written to both cache and database simultaneously. 
+  - Most of the written data may never be used, exploiting space. 
   - **Use Case**: Ensures data consistency.
 
 - **Write-Behind Cache**  
